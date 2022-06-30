@@ -12,7 +12,7 @@ engine = db.create_engine('sqlite:///acnh.db')
 
 def add_fish_table():
     fish_frame = pd.DataFrame.from_dict(fish_response.json())
-    fish_frame.to_sql('acnh-fish', con=engine, if_exists='replace',index=False)
+    fish_frame.to_sql('acnh-fish', con=engine, if_exists='replace', index= False)
 
 
 def add_sea_table():
