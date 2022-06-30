@@ -11,18 +11,18 @@ engine = db.create_engine('sqlite:///acnh.db')
 
 
 def add_fish_table():
-    fish_frame = pd.DataFrame.from_dict(fish_response.json())
-    fish_frame.to_sql('acnh-fish', con=engine, if_exists='replace', index= False)
+    fishFrame = pd.DataFrame.from_dict(fish_response.json())
+    fishFrame.to_sql('acnh-fish', con=engine, if_exists='replace', index=False)
 
 
 def add_sea_table():
-    sea_frame = pd.DataFrame.from_dict(sea_response.json())
-    sea_frame.to_sql('acnh-sea-creatures', con=engine, if_exists='replace', index=False)
+    seaFrame = pd.DataFrame.from_dict(sea_response.json())
+    seaFrame.to_sql('acnh-sea-creatures', con=engine, if_exists='replace', index=False)
 
 
 def add_bug_table():
-    bug_frame = pd.DataFrame.from_dict(bug_response.json())
-    bug_frame.to_sql('acnh-bugs', con=engine, if_exists='replace', index=False)
+    bugFrame = pd.DataFrame.from_dict(bug_response.json())
+    bugFrame.to_sql('acnh-bugs', con=engine, if_exists='replace', index=False)
 
 
 '''
