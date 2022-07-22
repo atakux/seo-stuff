@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Mood Entries</h2>
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Date</th>
+      <th scope="col">Entry</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if moods %}
+  <tbody>
+    {% for mood in moods %}
+    <tr>
+      <td> <input type="checkbox"></td>
+      <td>{{ mood.date.strftime("%b %d, %Y") }}</td> 
+      <td>{{ mood.mood }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+  <tbody>
+    <tr>
+      <p>No moods yet.</p>
+    </tr>
+  </tbody>
+  {% endif %}
+</table>
+{% endblock content %}

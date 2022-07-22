@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h2>Journal Entries</h2>
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Date</th>
+      <th scope="col">Entry</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  {% if journals %}
+  <tbody>
+    {% for journal in journals %}
+    <tr>
+      <td> <input type="checkbox" /> </td>
+      <td>{{ journal.date.strftime("%b %d, %Y") }}</td>
+      {% if journal.entry|length > 60 %} 
+      <td>{{ journal.entry[:60] }}&#8230;</td>
+      {% else %}
+      <td>{{ journal.entry }}</td>
+      {% endif %}
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% else %}
+  <tbody>
+    <tr>
+      <p>No journals yet.</p>
+    </tr>
+  </tbody>
+  {% endif %}
+</table>
+
+{% endblock content %}

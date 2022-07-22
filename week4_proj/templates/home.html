@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1> Dashboard </h1>
+
+<!-- THIS STYLESHEET GETS OUR BUTTONS TO BE IN A CIRCLE -->
+<style type="text/css">
+        .xyz {
+            background-size: auto;
+            text-align: center;
+            padding-top: 100px;
+        }
+        
+        .btn-circle.btn-xl {
+            width: 76px;
+            height: 70px;
+            padding: 10px 16px;
+            border-radius: 35px;
+            font-size: 12px;
+            text-align: center;
+        }
+</style>
+
+
+<div class="row">
+  <!-- THE FIRST CARD THAT CONTAINS THE HABIT TRACKER -->
+  <div class="col-sm-7">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Don't forget to ...</h5>
+        {% if habits %}
+        <div class="container">
+          {% for habit in habits %}
+          <div class="row">
+            <div class="col-md-5">
+              <p class="card-text">{{ habit.description }}</p>
+            </div>
+            <div class="col-sm">
+                <p class="card-text">{{'!' * habit.importance }}</p>
+            </div>
+            <div class="col-sm">
+              <p class="card-text"><form>
+                <div><label><input type="checkbox" /> Done?</label></div>
+              </form></p>
+            </div>
+          </div>
+          {% endfor %}
+          <!-- The Button to submit -->
+          <p> <a href="#" class="btn btn-primary">Submit</a> </p>
+        </div>
+        {% else %}
+        <p class="card-text">No more habits for today!</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- THE SECOND CARD THAT CONTAINS THE JOURNAL -->
+  <div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Journal</h5>
+        {% if journal_form %}
+        <p class="card-text">Pour your feelings out here (´･ω･`)</p>
+        <form method="POST" action="{{ url_for('journal_submit') }}">
+          {{ journal_form.hidden_tag() }}
+          <fieldset class="form-group">
+            <div class="form-group">
+              {% if journal_form.entry.errors %}
+                {{ journal_form.entry(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in journal_form.entry.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ journal_form.entry(class="form-control form-control-lg") }}
+              {% endif %}
+            </div>
+          </fieldset>
+          <div class="form-group">
+            {{ journal_form.submit(class="btn btn-primary") }}
+          </div>
+        </form>
+        {% else %}
+        <p class="card-text">Journal already written for today!</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- THE FINAL CARD THAT CONTAINS THE MOOD TRACKER -->
+<div class="row">
+
+  <div class="col-sm-7">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">How are you feeling?</h5>
+        {% if mood_form %}
+        <form method="POST" action="{{ url_for('mood_submit') }}">
+          {{ mood_form.hidden_tag() }}
+          <div class="form-group">
+            {{ mood_form.happy(class="btn btn-primary btn-circle btn-xl") }}
+            {{ mood_form.excited(class="btn btn-secondary btn-circle btn-xl") }}
+            {{ mood_form.sad(class="btn btn-success btn-circle btn-xl") }}
+            {{ mood_form.angry(class="btn btn-danger btn-circle btn-xl") }}
+            {{ mood_form.scared(class="btn btn-warning btn-circle btn-xl") }}
+          </div>
+        </form>
+        {% else %}
+        <p class="card-text">Mood already chosen for today!</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+{% endblock content %}
