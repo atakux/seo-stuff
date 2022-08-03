@@ -1,0 +1,12 @@
+Flask==2.0.1
+Flask-WTF==0.15.1
+Flask-Mail==0.9.1
+googlemaps==4.6.0
+gunicorn==20.0.4
+Jinja2==3.0.1
+Pillow==8.2.0
+requests==2.27.1
+SQLAlchemy==1.4.19
+WTForms==2.3.3
+bcrypt==3.2.2
+mime==0.1.0
